@@ -3,450 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پنل عملیات تولید انبوه موتورهای اسکرم جت هیدروژنه موشکهای بالستیک</title>
+    <title>پنل فرماندهی عملیات تولید انبوه موتورهای اسکرم جت هیدروژنه موشکهای بالستیک:</title>
     <style>
         :root {
-            --bg-dark: #030712;
-            --panel-bg: rgba(10, 20, 38, 0.92);
-            --cyan-glow: #00f0ff;
-            --green-glow: #00ff88;
-            --red-alert: #ff2a44;
-            --amber-warn: #ffaa00;
-            --border-line: rgba(0, 240, 255, 0.22);
-            --text-muted: #8ca3ba;
+            --bg-main: #060b13;
+            --panel-bg: rgba(13, 22, 35, 0.9);
+            --border-ui: #1f334d;
+            --accent-scram: #38bdf8;
+            --accent-flame: #f97316;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --text-light: #f1f5f9;
+            --text-dim: #94a3b8;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            user-select: none;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background-color: var(--bg-main); color: var(--text-light); font-size: 13px; padding: 15px; line-height: 1.6; }
 
-        body {
-            background-color: var(--bg-dark);
-            color: #f1f5f9;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            background-image: 
-                radial-gradient(circle at 50% 10%, rgba(0, 100, 200, 0.15) 0%, transparent 70%),
-                linear-gradient(rgba(0, 240, 255, 0.025) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 240, 255, 0.025) 1px, transparent 1px);
-            background-size: 100% 100%, 25px 25px, 25px 25px;
-        }
+        .header { background: #0c1829; border: 1px solid var(--accent-flame); border-radius: 8px; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; box-shadow: 0 0 15px rgba(249, 115, 22, 0.15); }
+        .header h1 { font-size: 16px; color: var(--accent-flame); }
+        .badge { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid var(--accent-green); padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; }
 
-        header {
-            padding: 14px 20px;
-            background: rgba(4, 12, 24, 0.98);
-            border-bottom: 2px solid var(--cyan-glow);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            box-shadow: 0 4px 25px rgba(0, 240, 255, 0.15);
-        }
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        @media (max-width: 768px) { .grid-container { grid-template-columns: 1fr; } }
 
-        .header-title h1 {
-            font-size: 1.18rem;
-            color: var(--cyan-glow);
-            font-weight: 700;
-            letter-spacing: -0.3px;
-        }
+        .card { background: var(--panel-bg); border: 1px solid var(--border-ui); border-radius: 8px; padding: 15px; }
+        .card-title { font-size: 14px; font-weight: bold; color: var(--accent-scram); margin-bottom: 12px; border-bottom: 1px solid var(--border-ui); padding-bottom: 6px; }
 
-        .header-title p {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            margin-top: 3px;
-        }
+        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+        .metric-box { background: #07101c; border: 1px solid var(--border-ui); padding: 10px; border-radius: 6px; }
+        .metric-box span { font-size: 11px; color: var(--text-dim); display: block; }
+        .metric-box strong { font-size: 16px; color: #fff; display: block; margin-top: 4px; }
 
-        .top-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 6px 14px;
-            border-radius: 6px;
-            border: 1px solid var(--border-line);
-            font-size: 0.78rem;
-        }
+        .btn { background: #132742; color: #fff; border: 1px solid #23456f; padding: 10px; border-radius: 6px; cursor: pointer; width: 100%; margin-bottom: 8px; text-align: right; font-size: 12px; transition: 0.2s; }
+        .btn:hover { border-color: var(--accent-flame); background: #1d395f; }
+        .btn-danger { border-color: var(--accent-red); color: #fca5a5; }
 
-        .live-dot {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            background: var(--green-glow);
-            box-shadow: 0 0 10px var(--green-glow);
-            animation: pulse 1.2s infinite alternate;
-        }
+        .console { background: #050b14; border: 1px solid var(--border-ui); border-radius: 6px; padding: 10px; height: 140px; overflow-y: auto; font-family: monospace; font-size: 11px; color: #38bdf8; }
 
-        @keyframes pulse {
-            from { opacity: 0.4; }
-            to { opacity: 1; transform: scale(1.15); }
-        }
-
-        .security-banner {
-            background: rgba(255, 170, 0, 0.08);
-            border-bottom: 1px solid rgba(255, 170, 0, 0.35);
-            padding: 10px 18px;
-            font-size: 0.79rem;
-            color: #ffe499;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            line-height: 1.6;
-        }
-
-        .contact-btn {
-            background: rgba(0, 240, 255, 0.12);
-            border: 1px solid var(--cyan-glow);
-            color: var(--cyan-glow);
-            padding: 4px 10px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-family: monospace;
-            font-size: 0.8rem;
-            transition: 0.2s;
-        }
-
-        .contact-btn:hover {
-            background: var(--cyan-glow);
-            color: #000;
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr 1fr;
-            gap: 14px;
-            padding: 14px;
-            flex: 1;
-        }
-
-        @media (max-width: 1100px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .card {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-line);
+        /* Legal Box Style */
+        .legal-box {
+            background: rgba(12, 24, 41, 0.95);
+            border: 1px solid var(--accent-flame);
+            border-right: 4px solid var(--accent-flame);
+            padding: 20px;
             border-radius: 8px;
-            padding: 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            backdrop-filter: blur(10px);
+            margin-bottom: 15px;
+            color: #e2e8f0;
+            line-height: 1.8;
+            box-shadow: 0 0 12px rgba(249, 115, 22, 0.1);
         }
+        .legal-box h3 { color: var(--accent-flame); margin-bottom: 10px; font-size: 14px; }
+        .legal-box p { margin-bottom: 10px; }
 
-        .card-header {
-            font-size: 0.88rem;
-            color: var(--cyan-glow);
-            border-bottom: 1px dashed rgba(0, 240, 255, 0.2);
-            padding-bottom: 6px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: bold;
-        }
-
-        .metric-2col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
-
-        .metric-box {
-            background: rgba(0, 12, 26, 0.7);
-            border: 1px solid rgba(0, 240, 255, 0.15);
-            border-radius: 6px;
-            padding: 8px 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-        }
-
-        .metric-title {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-        }
-
-        .metric-num {
-            font-size: 1.05rem;
-            font-weight: bold;
-            font-family: monospace;
-            color: #fff;
-        }
-
-        .progress-track {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 4px;
-            height: 8px;
-            overflow: hidden;
-            margin-top: 4px;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--cyan-glow), var(--green-glow));
-            width: 88%;
-        }
-
-        canvas {
-            background: #020710;
-            border-radius: 6px;
-            border: 1px solid var(--border-line);
-            width: 100%;
-            aspect-ratio: 16/9;
-        }
-
-        .spec-list {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            line-height: 1.9;
-        }
-
-        .spec-list b {
-            color: var(--cyan-glow);
-        }
-
-        .status-pill {
-            display: inline-block;
-            padding: 2px 7px;
-            border-radius: 3px;
-            font-size: 0.68rem;
-            font-weight: bold;
-        }
-
-        .pill-active { background: rgba(0, 255, 136, 0.15); color: var(--green-glow); border: 1px solid var(--green-glow); }
-        .pill-warn { background: rgba(255, 170, 0, 0.15); color: var(--amber-warn); border: 1px solid var(--amber-warn); }
-
-        footer {
-            background: rgba(2, 6, 14, 0.98);
-            border-top: 1px solid rgba(0, 240, 255, 0.2);
-            padding: 12px 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            font-size: 0.74rem;
-            color: var(--text-muted);
-            gap: 10px;
-        }
+        .footer-card { background: #07101d; border: 1px solid var(--border-ui); padding: 15px 20px; border-radius: 6px; }
+        .footer-card code { color: var(--accent-flame); font-size: 14px; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="header-title">
-            <h1>پنل عملیات تولید انبوه موتورهای اسکرم جت هیدروژنه موشکهای بالستیک</h1>
-            <p>برگرفته از پرپوزال حسین لعلیان؛ سال ۱۳۹۵؛ رتبه ۳۲ کنکور دکتری</p>
-        </div>
-        <div class="top-badge">
-            <div class="live-dot"></div>
-            <span>خط تولید کارخانه: <b style="color: var(--green-glow);">SCRAMJET-LINE ACTIVE</b></span>
-        </div>
-    </header>
-
-    <div class="security-banner">
-        <div>
-            <strong>اطلاعیه حقوقی و مهندسی:</strong> برای ممانعت از کپی‌برداری غیرمجاز، دمویی از این پنل با داده‌های ناچیز و مقیاس‌شده ارائه شده است! اما در صورت سفارش رسمی، این سیستم طوری مهندسی و تولید می‌شود که با اتصال به لبه‌های پردازشی و سنسورهای واقعی اتاق تست و خط تولید کارخانه، دقیق‌ترین پاسخ و کنترل بهینه را بدهد.
-        </div>
-        <a href="mailto:ai.algorithms.ballistics@gmail.com" class="contact-btn">ai.algorithms.ballistics@gmail.com</a>
+    <div class="header">
+        <h1>🚀 پنل فرماندهی عملیات تولید انبوه موتورهای اسکرم جت هیدروژنه موشکهای بالستیک:</h1>
+        <span class="badge">HIL SIMULINK CONNECTED</span>
     </div>
 
-    <main class="dashboard-grid">
-
-        <!-- ستون اول: بهینه‌سازی، هوش مصنوعی و Simulink/HIL -->
-        <section class="card">
-            <div class="card-header">
-                <span>هسته هوشمند انفیس و شبیه‌سازی HIL</span>
-                <span class="status-pill pill-active">SIMULINK ACTIVE</span>
-            </div>
-
-            <div class="spec-list">
-                • الگوریتم هدایت احتراق: <b>فراابتکاری هیبرید (Metaheuristic ANFIS-GA)</b><br>
-                • بستر شبیه‌سازی درجا: <b>HIL Real-Time Interface (0.001s)</b><br>
-                • مدل دینامیکی: <b>Super-Combustion Simulink Engine v10</b><br>
-                • تخمین جریان ورودی: <b>ماخ ۵ الی ۱۲ (Mach 5–12 Flow)</b>
-            </div>
-
-            <div class="metric-2col">
+    <div class="grid-container">
+        <div class="card">
+            <div class="card-title">تله‌متری احتراق فراصوت، دینامیک سیالاتی و رانش (Thrust Telemetry)</div>
+            <div class="metrics-grid">
                 <div class="metric-box">
-                    <span class="metric-title">دقت تخمین انفیس (ANFIS)</span>
-                    <span class="metric-num" id="anfisAcc">99.14%</span>
+                    <span>عدد ماخ جریان ورودی اینلت:</span>
+                    <strong style="color: var(--accent-scram);">Mach 6.8 (پایدار)</strong>
                 </div>
                 <div class="metric-box">
-                    <span class="metric-title">همگرایی الگوریتم فراابتکاری</span>
-                    <span class="metric-num">0.00034</span>
+                    <span>دمای محفظه احتراق اسکرم‌جت:</span>
+                    <strong>۲٬۴۸۰ K (خنک‌کاری بازیابشی)</strong>
                 </div>
                 <div class="metric-box">
-                    <span class="metric-title">نرخ پایداری شعله مافوق‌صوت</span>
-                    <span class="metric-num" id="flameStab">98.8%</span>
+                    <span>فشار تزریق هیدروژن فوق‌سرد:</span>
+                    <strong>۸۵ bar (سوخت LH2)</strong>
                 </div>
                 <div class="metric-box">
-                    <span class="metric-title">تاخیر داده‌های لبه (Edge)</span>
-                    <span class="metric-num">0.8 ms</span>
+                    <span>راندمان اختلاط سوخت و هوا:</span>
+                    <strong style="color: var(--accent-green);">۹۸٫۴٪ (الگوریتم ANFIS)</strong>
                 </div>
             </div>
-
-            <div class="metric-box">
-                <div style="display: flex; justify-content: space-between; font-size: 0.72rem;">
-                    <span>شاخص مقایسه عملکرد الگوریتم نسبت به روش کلاسیک</span>
-                    <span style="color: var(--green-glow); font-weight: bold;">+34.2% راندمان</span>
-                </div>
-                <div class="progress-track">
-                    <div class="progress-bar" style="width: 86%;"></div>
-                </div>
+            <div style="background: #07101c; border: 1px solid var(--border-ui); padding: 10px; border-radius: 6px; margin-top: 10px;">
+                <span style="font-size: 11px; color: var(--text-dim);">نرخ تراست ویژه تولیدی (Specific Impulse - Isp):</span>
+                <div style="font-size: 15px; font-weight: bold; color: var(--accent-flame); margin-top: 4px;">۲٬۳۵۰ ثانیه | پایداری شوک‌های مایل در ورودی هوا</div>
             </div>
-        </section>
+        </div>
 
-        <!-- ستون دوم: اتاق تست داغ و پایش زنده کارخانه -->
-        <section class="card">
-            <div class="card-header">
-                <span>پایش زنده احتراق و تست داغ کارخانه‌ای (Test-Cell)</span>
-                <span class="status-pill pill-active">MACH 7.4 SIMULATED</span>
+        <div class="card">
+            <div class="card-title">فرمان‌های تست محفظه احتراق و شبیه‌سازی خط تولید انبوه</div>
+            <button class="btn" onclick="triggerAction('IGNITION')">🔥 تست ترتیبی پاشش چندمرحله‌ای هیدروژن و اشتعال ماوراء صوت</button>
+            <button class="btn" onclick="triggerAction('SHOCK')">⚡ کنترل دینامیک شوک‌های موج ضربه‌ای اینلت (Shock-Wave Isolation)</button>
+            <button class="btn btn-danger" onclick="triggerAction('PURGE')">⚠️ شستشوی اضطراری مسیر خطوط هیدروژن با گاز هلیوم (Purge Sequence)</button>
+            <div class="console" id="logBox" style="margin-top: 10px;">
+                <div>[سیستم] اتصال بی‌درنگ لایه استنتاج به ماژول‌های شبیه‌ساز آیرودینامیک و احتراق برقرار است.</div>
             </div>
+        </div>
+    </div>
 
-            <canvas id="combustionChart"></canvas>
+    <!-- کادر بیانیه حقوقی و فنی سیستم -->
+    <div class="legal-box">
+        <h3>بیانیه حقوقی و فنی سیستم (Demo Verification):</h3>
+        <p>جهت ممانعت از کپی‌برداری غیرمجاز و حفظ حقوق مالکیت فکری، این نسخه ارائه‌شده صرفاً یک دمو با داده‌های نمونه و تقلیل‌یافته (Synthetic/Minimal) می‌باشد. در صورت ثبت سفارش صنعتی، پنل نهایی به‌صورت تکاملی توسعه یافته و از طریق پروتکل‌های سخت‌افزاری صنعتی (HIL) به لبه‌های پردازشی واقعی (Real-Time Sensors Edge)، داده‌های مدل‌های شبیه‌ساز Simulink متصل می‌گردد تل کمترین ضریب خطا محاسبه نماید.</p>
+        <p>و هر زمان پل واقعی Simulink/HIL و سنسورهای هوش مصنوعی لبه فدرال متصل شوند، سیستم آماده دریافت اطلاعات زنده خواهد بود.</p>
+    </div>
 
-            <div class="metric-2col">
-                <div class="metric-box">
-                    <span class="metric-title">دمای محفظه احتراق (Stagnation)</span>
-                    <span class="metric-num" id="tempVal" style="color: #ffaa00;">2840 K</span>
-                </div>
-                <div class="metric-box">
-                    <span class="metric-title">فشار کل تزریق هیدروژن
-            </div>
-
-            <div class="metric-box">
-                <div style="display: flex; justify-content: space-between; font-size: 0.72rem;">
-                    <span>شاخص مقایسه عملکرد الگوریتم نسبت به روش کلاسیک</span>
-                    <span style="color: var(--green-glow); font-weight: bold;">+34.2% راندمان</span>
-                </div>
-                <div class="progress-track">
-                    <div class="progress-bar" style="width: 86%;"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ستون دوم: اتاق تست داغ و پایش زنده کارخانه -->
-        <section class="card">
-            <div class="card-header">
-                <span>پایش زنده احتراق و تست داغ کارخانه‌ای (Test-Cell)</span>
-                <span class="status-pill pill-active">MACH 7.4 SIMULATED</span>
-            </div>
-
-            <canvas id="combustionChart"></canvas>
-
-            <div class="metric-2col">
-                <div class="metric-box">
-                    <span class="metric-title">دمای محفظه احتراق (Stagnation)</span>
-                    <span class="metric-num" id="tempVal" style="color: #ffaa00;">2840 K</span>
-                </div>
-                <div class="metric-box">
-                    <span class="metric-title">فشار کل تزریق هیدروژن ($P_0$)</span>
-                    <span class="metric-num" id="pressVal" style="color: var(--cyan-glow);">4.82 MPa</span>
-                </div>
-                <div class="metric-box">
-                    <span class="metric-title">تراست ویژه لحظه‌ای ($I_{sp}$)</span>
-                    <span class="metric-num" id="ispVal">3120 s</span>
-                </div>
-                <div class="metric-box">
-                    <span class="metric-title">تست غیرمخرب جداره (NDT Ultrasonic)</span>
-<div class="metric-box">
-                    <span class="metric-title">راندمان خنک‌کاری پیش‌گرم</span>
-                    <span class="metric-num">94.6%</span>
-                </div>
-            </div>
-
-            <div class="metric-box">
-                <span class="metric-title">ماتریس اتصال داده‌های صنعتی</span>
-                <div style="font-size: 0.72rem; line-height: 1.8; color: var(--text-muted); margin-top: 4px;">
-                    • سازگاری باس داده: <span style="color: #fff; font-family: monospace;">MIL-STD-1553B / CAN</span><br>
-                    • هماهنگ‌سازی سنسورهای پیزوالکتریک: <span style="color: var(--green-glow); font-family: monospace;">100 kHz</span><br>
-                    • بهینه‌ساز پروفیل تراست: <span style="color: var(--cyan-glow); font-family: monospace;">GA Multi-Objective</span>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer>
-        <div>مالکیت معنوی طرح، محاسبات اسکرم‌جت و کنترل بهینه: <strong>مهندس حسین لعلیان</strong> (سال ۱۳۹۵)</div>
-        <div>سفارش خط تولید و یکپارچه‌سازی لبه: <a href="mailto:ai.algorithms.ballistics@gmail.com" style="color: var(--cyan-glow); text-decoration: none;">ai.algorithms.ballistics@gmail.com</a></div>
-    </footer>
+    <div class="footer-card">
+        <p>طراحی و توسعه مهندسی: <strong>حسین لعلیان؛ رتبه ۳۲ کنکور دکتری</strong></p>
+        <p>رایانامه رسمی ارتباطات صنعتی: <code>ai.algorithms.ballistics@gmail.com</code></p>
+    </div>
 
     <script>
-        const canvas = document.getElementById('combustionChart');
-        const ctx = canvas.getContext('2d');
-        const tempVal = document.getElementById('tempVal');
-        const pressVal = document.getElementById('pressVal');
-        const ispVal = document.getElementById('ispVal');
-        const anfisAcc = document.getElementById('anfisAcc');
-
-        let points = [];
-        const maxPoints = 50;
-        for (let i = 0; i < maxPoints; i++) {
-            points.push(50 + Math.random() * 20);
+        function triggerAction(type) {
+            const log = document.getElementById('logBox');
+            const time = new Date().toLocaleTimeString('fa-IR');
+            let text = "";
+            if(type === 'IGNITION') text = `[${time}] توالی پاشش میکرواینجکتورهای LH2 فعال شد: زمان اقامت سوخت ۰٫۸ میلی‌ثانیه، شعله ماوراء صوت تثبیت گردید.`;
+            else if(type === 'SHOCK') text = `[${time}] هندسه لبه ورودی تنظیم شد: موقعیت سیستم امواج ضربه‌ای روی گلویی ایزولاتور قفل شد.`;
+            else if(type === 'PURGE') text = `[${time}] پروتکل قطع جریان فعال شد: والوهای برودتی بسته و خطوط با گاز نجیب هلیوم پاکسازی شدند.`;
+            const item = document.createElement('div');
+            item.innerText = text;
+            log.appendChild(item);
+            log.scrollTop = log.scrollHeight;
         }
-
-        function drawChart() {
-            const w = canvas.width = canvas.offsetWidth;
-            const h = canvas.height = canvas.offsetHeight;
-
-            ctx.clearRect(0, 0, w, h);
-
-            // خطوط شبکه مهندسی
-            ctx.strokeStyle = 'rgba(0, 240, 255, 0.08)';
-            ctx.lineWidth = 1;
-            for (let y = 0; y < h; y += h / 5) {
-                ctx.beginPath();
-                ctx.moveTo(0, y); ctx.lineTo(w, y);
-                ctx.stroke();
-            }
-
-            // موج دینامیک احتراق اسکرم‌جت
-            ctx.strokeStyle = '#00f0ff';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            const step = w / (maxPoints - 1);
-            for (let i = 0; i < points.length; i++) {
-                const x = i * step;
-                const y = h - (points[i] / 100) * (h - 20) - 10;
-                if (i === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            }
-            ctx.stroke();
-
-            // گرادیانت زیر نمودار
-            ctx.lineTo(w, h);
-            ctx.lineTo(0, h);
-            ctx.fillStyle = 'rgba(0, 240, 255, 0.05)';
-            ctx.fill();
-        }
-
-        // حلقه شبیه‌سازی زنده سنسورهای کارخانه
-        setInterval(() => {
-            points.shift();
-            const last = points[points.length - 1];
-            const next = Math.max(30, Math.min(95, last + (Math.random() * 12 - 6)));
-            points.push(next);
-            drawChart();
-
-            // نوسان پارامترهای فیزیکی اتاق تست
-            tempVal.innerText = (2800 + Math.floor(Math.random() * 90)) + ' K';
-            pressVal.innerText = (4.75 + Math.random() * 0.2).toFixed(2) + ' MPa';
-            ispVal.innerText = (3100 + Math.floor(Math.random() * 60)) + ' s';
-            anfisAcc.innerText = (99.0 + Math.random() * 0.3).toFixed(2) + '%';
-        }, 300);
-
-        window.addEventListener('resize', drawChart);
-        drawChart();
     </script>
 </body>
 </html>
