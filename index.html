@@ -1,256 +1,169 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>پنل فرماندهی عملیات تولید انبوه موتورهای اسکرم جت هیدروژنه موشکهای بالستیک | حسین لعلیان</title>
-  <style>
-    :root {
-      --bg: #070b12;
-      --card-bg: #0d1522;
-      --border: #1e293b;
-      --primary: #f97316;
-      --primary-glow: rgba(249, 115, 22, 0.25);
-      --cyan: #38bdf8;
-      --green: #22c55e;
-      --text: #f1f5f9;
-      --text-muted: #94a3b8;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      padding: 16px;
-    }
-    header {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    }
-    .header-content {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-    }
-    h1 {
-      font-size: 1.35rem;
-      color: #fff;
-      margin-bottom: 6px;
-    }
-    .subtitle {
-      font-size: 0.9rem;
-      color: var(--cyan);
-      font-weight: 600;
-    }
-    .badges {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .badge {
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      border: 1px solid transparent;
-    }
-    .badge-hil {
-      background: rgba(34, 197, 94, 0.15);
-      color: var(--green);
-      border-color: rgba(34, 197, 94, 0.3);
-    }
-    .badge-anfis {
-      background: rgba(249, 115, 22, 0.15);
-      color: var(--primary);
-      border-color: rgba(249, 115, 22, 0.3);
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .card-title {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      padding-bottom: 6px;
-    }
-    .card-value {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #fff;
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
-    }
-    .card-meta {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-    .console-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
-      margin-bottom: 20px;
-    }
-    .console-card h3 {
-      font-size: 0.95rem;
-      margin-bottom: 10px;
-      color: var(--cyan);
-    }
-    .terminal {
-      background: #04070c;
-      border: 1px solid #111b27;
-      border-radius: 6px;
-      padding: 12px;
-      font-family: monospace;
-      font-size: 0.85rem;
-      color: #38bdf8;
-      height: 110px;
-      overflow-y: auto;
-      line-height: 1.6;
-    }
-    .disclaimer-card {
-      background: #090e17;
-      border: 1px solid #1e293b;
-      border-radius: 10px;
-      padding: 16px;
-      margin-bottom: 20px;
-    }
-    .disclaimer-title {
-      font-size: 0.95rem;
-      font-weight: bold;
-      color: #f59e0b;
-      margin-bottom: 8px;
-    }
-    .disclaimer-text {
-      font-size: 0.85rem;
-      line-height: 1.7;
-      color: #cbd5e1;
-      text-align: justify;
-    }
-    footer {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-    footer a {
-      color: var(--cyan);
-      text-decoration: none;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>پنل فرماندهی تولید موتورهای اسکرم‌جت هیدروژنه</title>
+<style>
+:root {
+  --bg-main: #050a0f;
+  --panel-bg: rgba(11, 22, 34, 0.9);
+  --border-ui: #1a364d;
+  --accent-gold: #eab308;
+  --accent-blue: #38bdf8;
+  --accent-green: #10b981;
+  --accent-red: #ef4444;
+  --text-light: #f1f5f9;
+  --text-dim: #94a3b8;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
+body { background-color: var(--bg-main); color: var(--text-light); font-size: 13px; padding: 15px; line-height: 1.6; }
+
+.header { background: #0b1c2d; border: 1px solid var(--accent-gold); border-radius: 8px; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; box-shadow: 0 0 15px rgba(234, 179, 8, 0.15); }
+.header h1 { font-size: 16px; color: var(--accent-gold); }
+.badge { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid var(--accent-green); padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+
+.grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+@media (max-width: 768px) { .grid-container { grid-template-columns: 1fr; } }
+
+.card { background: var(--panel-bg); border: 1px solid var(--border-ui); border-radius: 8px; padding: 15px; }
+.card-title { font-size: 14px; font-weight: bold; color: var(--accent-blue); margin-bottom: 12px; border-bottom: 1px solid var(--border-ui); padding-bottom: 6px; }
+
+.metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.metric-box { background: #07121d; border: 1px solid var(--border-ui); padding: 10px; border-radius: 6px; }
+.metric-box span { font-size: 11px; color: var(--text-dim); display: block; }
+.metric-box strong { font-size: 15px; color: #fff; display: block; margin-top: 4px; }
+
+.btn { background: #132a42; color: #fff; border: 1px solid #234870; padding: 10px; border-radius: 6px; cursor: pointer; width: 100%; margin-bottom: 8px; text-align: right; font-size: 12px; transition: 0.2s; }
+.btn:hover { border-color: var(--accent-gold); background: #1d3d61; }
+.btn-danger { border-color: var(--accent-red); color: #fca5a5; }
+
+.console { background: #040c14; border: 1px solid var(--border-ui); border-radius: 6px; padding: 10px; height: 130px; overflow-y: auto; font-family: monospace; font-size: 11px; color: #38bdf8; }
+
+.legal-box {
+  background: rgba(11, 25, 40, 0.95);
+  border: 1px solid var(--accent-gold);
+  border-right: 4px solid var(--accent-gold);
+  padding: 18px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  color: #e2e8f0;
+  line-height: 1.8;
+}
+.legal-box h3 { color: var(--accent-gold); margin-bottom: 10px; font-size: 14px; }
+
+.accordion-wrapper { margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px; }
+.acc-btn { 
+  background: #0d1e30; color: #f8fafc; border: 1px solid #234870; border-right: 4px solid var(--accent-gold); 
+  padding: 12px 15px; border-radius: 6px; cursor: pointer; width: 100%; text-align: right; font-size: 13px; font-weight: bold; 
+  display: flex; justify-content: space-between; align-items: center;
+}
+.acc-btn:hover { background: #152e4a; border-color: var(--accent-gold); }
+.acc-content { 
+  display: none; background: #081421; border: 1px solid #1a364d; border-top: none; 
+  border-radius: 0 0 6px 6px; padding: 15px 18px; font-size: 12.5px; line-height: 1.85; color: #cbd5e1; 
+}
+
+.footer-card { background: #071422; border: 1px solid var(--border-ui); padding: 15px 20px; border-radius: 6px; }
+.footer-card code { color: var(--accent-gold); font-size: 13px; font-weight: bold; }
+</style>
 </head>
 <body>
 
-  <header>
-    <div class="header-content">
-      <div>
-        <h1>پنل فرماندهی عملیات تولید انبوه موتورهای اسکرم جت هیدروژنه موشکهای بالستیک</h1>
-        <div class="subtitle">برگرفته از پرپوزال حسین لعلیان سال ۱۳۹۵</div>
-      </div>
-      <div class="badges">
-        <span class="badge badge-hil">● HIL SIMULINK CONNECTED</span>
-        <span class="badge badge-anfis">ANFIS CONTROL</span>
-        <span class="badge" style="background:rgba(56,189,248,0.15); color:var(--cyan); border-color:rgba(56,189,248,0.3);">FEDERATED SENSORS</span>
-      </div>
-    </div>
-  </header>
+<div class="header">
+  <div>
+    <h1>🚀 پنل فرماندهی تولید انبوه موتورهای اسکرم‌جت هیدروژنه</h1>
+    <div style="font-size: 11px; color: var(--text-dim); margin-top: 4px;">تولید بالستیک و سامانه‌های پیشران مافوق صوت</div>
+  </div>
+  <div class="badge">HIL SIMULINK CONNECTED</div>
+</div>
 
-  <div class="grid">
-    <div class="card">
-      <div class="card-title">عدد ماخ جریان ورودی اینلت (Inlet Mach)</div>
-      <div class="card-value" id="machVal">Mach 6.8</div>
-      <div class="card-meta">جریان فراصوت پایدار با شوک مایل بازگشتی</div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">دمای محفظه احتراق اسکرم‌جت</div>
-      <div class="card-value" id="tempVal">۲٬۴۸۰ K</div>
-      <div class="card-meta">سیستم خنک‌کاری فعال بازیابشی (Regenerative)</div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">فشار تزریق هیدروژن فوق‌سرد (LH2)</div>
-      <div class="card-value" id="pressVal">۸۵ bar</div>
-      <div class="card-meta">تزریق سوخت کرایوژنیک چندنقطه‌ای لبه حمله</div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">راندمان اختلاط سوخت و هوا (Combustion Eff.)</div>
-      <div class="card-value" id="effVal">۹۸.۴ ٪</div>
-      <div class="card-meta">بهینه‌سازی بلادرنگ تطبیقی مدل ANFIS</div>
-    </div>
-
-    <div class="card" style="grid-column: 1 / -1;">
-      <div class="card-title">نرخ تراست ویژه تولیدی (Specific Impulse - Isp)</div>
-      <div class="card-value" style="color:var(--primary);" id="ispVal">۲٬۳۵۰ sec</div>
-      <div class="card-meta">ضریب پایداری شوک‌های مایل در ورودی هوا: ۹۹.۲٪ | خط تولید رباتیک و کالیبراسیون صنعتی انبوه</div>
+<div class="grid-container">
+  <div class="card">
+    <div class="card-title">شاخص‌های تولید و احتراق</div>
+    <div class="metrics-grid">
+      <div class="metric-box"><span>بازدهی چرخه احتراق:</span><strong style="color: var(--accent-green);">۹۸.۴٪</strong></div>
+      <div class="metric-box"><span>نرخ تولید انبوه:</span><strong>۱۲ عدد/ماه</strong></div>
+      <div class="metric-box"><span>تنش حرارتی بدنه:</span><strong>۲۸۰۰ کلوین</strong></div>
+      <div class="metric-box"><span>وضعیت خط کنترل:</span><strong style="color: var(--accent-blue);">ANFIS/PSO</strong></div>
     </div>
   </div>
+  <div class="card">
+    <div class="card-title">فرمان‌های تولید</div>
+    <button class="btn" onclick="triggerAction('TEST')">📊 تست فشار مخزن هیدروژن</button>
+    <button class="btn" onclick="triggerAction('FLOW')">⚙️ کالیبراسیون نرخ تزریق سوخت</button>
+    <button class="btn btn-danger" onclick="triggerAction('SHUT')">⚠️ توقف اضطراری (Emergency Cutoff)</button>
+    <div class="console" id="consoleLog"><div>[سیستم] پلتفرم تولید فعال و متصل به سنسورهاست.</div></div>
+  </div>
+</div>
 
-  <div class="console-card">
-    <h3>فرمان‌های تست محفظه احتراق و مانیتورینگ بلادرنگ خط تولید انبوه</h3>
-    <div class="terminal" id="termLogs">
-      <div>[سیستم] اتصال بی‌درنگ لایه استنتاج به ماژول‌های شبیه‌ساز آیرودینامیک و احتراق برقرار است.</div>
-      <div>[شبیه‌ساز] نرخ جریان تزریق هیدروژن مایع با پالس‌های فرکانس بالا تراز گردید.</div>
-      <div>[کنترل] الگوریتم مهار لرزش پدیده‌های گذر صوت پایدار گزارش شد.</div>
+<div class="legal-box">
+  <h3>بیانیه حقوقی (برگرفته از پرپوزال حسین لعلیان سال۱۳۹۵):</h3>
+  <p>این سامانه صرفاً جهت نمایش توانمندی‌های شبیه‌سازی تولید موتور اسکرم‌جت است. تمامی حقوق محفوظ و هرگونه بهره‌برداری غیرمجاز پیگرد قانونی دارد.</p>
+</div>
+
+<div class="accordion-wrapper">
+  <!-- دکمه ۱ -->
+  <div>
+    <button class="acc-btn" onclick="toggleAccordion(1)"><span>📌 دکمه ۱: طرح توجیهی عملیاتی پلتفرم!</span><span id="icon-1">▼</span></button>
+    <div class="acc-content" id="acc-1">
+      <h4>بهینه‌سازی تولید و مدیریت بحران خط تولید اسکرم‌جت</h4>
+      <p>صنایع دفاعی امروز با نیاز حیاتی به تولید انبوه سامانه‌های پیشران مافوق صوت مواجهند. این داشبورد با پیاده‌سازی هوش مصنوعی، اتلاف قطعات در حین تولید را به حداقل رسانده و مدیریت متریال و زنجیره تامین موتورهای بالستیک را بهینه‌سازی می‌کند.</p>
     </div>
   </div>
-
-  <div class="disclaimer-card">
-    <div class="disclaimer-title">بیانیه حقوقی و فنی سیستم (Demo Verification):</div>
-    <div class="disclaimer-text">
-      جهت ممانعت از کپی‌برداری غیرمجاز و حفظ حقوق مالکیت فکری، این نسخه ارائه‌شده صرفاً یک دمو با داده‌های نمونه و تقلیل‌یافته (Synthetic/Minimal) می‌باشد. در صورت ثبت سفارش صنعتی، پنل نهایی به‌صورت تکاملی توسعه یافته و از طریق پروتکل‌های سخت‌افزاری صنعتی (HIL) به لبه‌های هوش مصنوعی فدرال پردازشی واقعی (Real-Time Sensors Edge)، داده‌های مدل‌های شبیه‌ساز Simulink متصل می‌گردد تا کمترین ضریب خطا محاسبه نماید. و هر زمان پل واقعی Simulink/HIL و سنسورهای هوش مصنوعی لبه فدرال متصل شوند، سیستم آماده دریافت اطلاعات زنده خواهد بود.
+  <!-- دکمه ۲ -->
+  <div>
+    <button class="acc-btn" onclick="toggleAccordion(2)"><span>⚙️ دکمه ۲: مکانیزم کاری و ارزش پیشنهادی!</span><span id="icon-2">▼</span></button>
+    <div class="acc-content" id="acc-2">
+      <h4>راهکار سامانه:</h4>
+      <p>پایش در لحظه وضعیت دما، فشار احتراق و یکپارچگی نازل‌ها. حذف گلوگاه‌های تولید از طریق پیش‌بینی خرابی ماشین‌ابزارها و تخصیص بهینه منابع تولیدی.</p>
     </div>
   </div>
-
-  <footer>
-    <div>
-      طراحی و توسعه مهندسی: <strong>حسین لعلیان؛ رتبه ۳۲ کنکور دکتری</strong>
+  <!-- دکمه ۳ -->
+  <div>
+    <button class="acc-btn" onclick="toggleAccordion(3)"><span>🧭 دکمه ۳: مسیر عملیاتی این پنل!</span><span id="icon-3">▼</span></button>
+    <div class="acc-content" id="acc-3">
+      <h4>فرآیند تولید:</h4>
+      <p>از بازرسی متالورژیکی ورودی تا تست نهایی در تونل باد مجازی. سیستم پارامترهای کنترل کیفیت (QC) را با پروتکل‌های PLC هماهنگ کرده و دستورات تولید را صادر می‌کند.</p>
     </div>
-    <div>
-      رایانامه رسمی ارتباطات صنعتی: <a href="mailto:ai.algorithms.ballistics@gmail.com">ai.algorithms.ballistics@gmail.com</a>
+  </div>
+  <!-- دکمه ۴ -->
+  <div>
+    <button class="acc-btn" onclick="toggleAccordion(4)"><span>📝 دکمه ۴: نکات کلیدی قرارداد!</span><span id="icon-4">▼</span></button>
+    <div class="acc-content" id="acc-4">
+      <h4>محدوده مسئولیت:</h4>
+      <p>تضمین کیفیت سامانه بر مبنای داده‌های حسگرهای نصب شده است. محرمانگی کامل داده‌های تولید و طرح‌های مهندسی طبق پروتکل‌های دفاعی تضمین می‌گردد.</p>
     </div>
-  </footer>
+  </div>
+  <!-- دکمه ۵ -->
+  <div>
+    <button class="acc-btn" onclick="toggleAccordion(5)"><span>💼 دکمه ۵: مدل‌های پیشنهادی!</span><span id="icon-5">▼</span></button>
+    <div class="acc-content" id="acc-5">
+      <h4>مدل‌ها:</h4>
+      <p>مدل اول: قرارداد تسهیم صرفه‌جویی در هزینه تولید. مدل دوم: فروش لایسنس سازمانی به همراه پشتیبانی فنی سالیانه برای خطوط تولید.</p>
+    </div>
+  </div>
+</div>
 
-  <script>
-    // شبیه‌ساز نوسان میکرو در بستر دمو
-    setInterval(() => {
-      const mach = (6.78 + Math.random() * 0.05).toFixed(2);
-      const temp = Math.floor(2475 + Math.random() * 12);
-      const eff = (98.2 + Math.random() * 0.4).toFixed(1);
-      
-      document.getElementById('machVal').innerText = 'Mach ' + mach;
-      document.getElementById('tempVal').innerText = temp.toLocaleString('fa-IR') + ' K';
-      document.getElementById('effVal').innerText = eff + ' ٪';
-    }, 2500);
-  </script>
+<div class="footer-card">
+  <div style="font-size: 12px; margin-bottom: 5px;">طراحی و توسعه مهندسی: <strong>حسین لعلیان؛ رتبه ۳۲ کنکور دکتری</strong></div>
+  <div>رایانامه رسمی: <code>ai.algorithms.ballistics@gmail.com</code></div>
+</div>
+
+<script>
+function triggerAction(type) {
+  const log = document.getElementById('consoleLog');
+  const time = new Date().toLocaleTimeString('fa-IR');
+  log.innerHTML += `<div>[${time}] فرمان ${type} صادر شد. وضعیت: عملیاتی.</div>`;
+  log.scrollTop = log.scrollHeight;
+}
+function toggleAccordion(id) {
+  const content = document.getElementById('acc-' + id);
+  const icon = document.getElementById('icon-' + id);
+  if (content.style.display === 'block') { content.style.display = 'none'; icon.innerText = '▼'; }
+  else { content.style.display = 'block'; icon.innerText = '▲'; }
+}
+</script>
 </body>
 </html>
