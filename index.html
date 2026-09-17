@@ -1,135 +1,256 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پنل فرماندهی عملیات تولید انبوه موتورهای اسکرم جت هیدروژنه موشکهای بالستیک:</title>
-    <style>
-        :root {
-            --bg-main: #060b13;
-            --panel-bg: rgba(13, 22, 35, 0.9);
-            --border-ui: #1f334d;
-            --accent-scram: #38bdf8;
-            --accent-flame: #f97316;
-            --accent-green: #10b981;
-            --accent-red: #ef4444;
-            --text-light: #f1f5f9;
-            --text-dim: #94a3b8;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
-        body { background-color: var(--bg-main); color: var(--text-light); font-size: 13px; padding: 15px; line-height: 1.6; }
-
-        .header { background: #0c1829; border: 1px solid var(--accent-flame); border-radius: 8px; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; box-shadow: 0 0 15px rgba(249, 115, 22, 0.15); }
-        .header h1 { font-size: 16px; color: var(--accent-flame); }
-        .badge { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid var(--accent-green); padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; }
-
-        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
-        @media (max-width: 768px) { .grid-container { grid-template-columns: 1fr; } }
-
-        .card { background: var(--panel-bg); border: 1px solid var(--border-ui); border-radius: 8px; padding: 15px; }
-        .card-title { font-size: 14px; font-weight: bold; color: var(--accent-scram); margin-bottom: 12px; border-bottom: 1px solid var(--border-ui); padding-bottom: 6px; }
-
-        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-        .metric-box { background: #07101c; border: 1px solid var(--border-ui); padding: 10px; border-radius: 6px; }
-        .metric-box span { font-size: 11px; color: var(--text-dim); display: block; }
-        .metric-box strong { font-size: 16px; color: #fff; display: block; margin-top: 4px; }
-
-        .btn { background: #132742; color: #fff; border: 1px solid #23456f; padding: 10px; border-radius: 6px; cursor: pointer; width: 100%; margin-bottom: 8px; text-align: right; font-size: 12px; transition: 0.2s; }
-        .btn:hover { border-color: var(--accent-flame); background: #1d395f; }
-        .btn-danger { border-color: var(--accent-red); color: #fca5a5; }
-
-        .console { background: #050b14; border: 1px solid var(--border-ui); border-radius: 6px; padding: 10px; height: 140px; overflow-y: auto; font-family: monospace; font-size: 11px; color: #38bdf8; }
-
-        /* Legal Box Style */
-        .legal-box {
-            background: rgba(12, 24, 41, 0.95);
-            border: 1px solid var(--accent-flame);
-            border-right: 4px solid var(--accent-flame);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            color: #e2e8f0;
-            line-height: 1.8;
-            box-shadow: 0 0 12px rgba(249, 115, 22, 0.1);
-        }
-        .legal-box h3 { color: var(--accent-flame); margin-bottom: 10px; font-size: 14px; }
-        .legal-box p { margin-bottom: 10px; }
-
-        .footer-card { background: #07101d; border: 1px solid var(--border-ui); padding: 15px 20px; border-radius: 6px; }
-        .footer-card code { color: var(--accent-flame); font-size: 14px; font-weight: bold; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>پنل فرماندهی عملیات تولید انبوه موتورهای اسکرم جت هیدروژنه موشکهای بالستیک | حسین لعلیان</title>
+  <style>
+    :root {
+      --bg: #070b12;
+      --card-bg: #0d1522;
+      --border: #1e293b;
+      --primary: #f97316;
+      --primary-glow: rgba(249, 115, 22, 0.25);
+      --cyan: #38bdf8;
+      --green: #22c55e;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+    }
+    header {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    .header-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    h1 {
+      font-size: 1.35rem;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--cyan);
+      font-weight: 600;
+    }
+    .badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      border: 1px solid transparent;
+    }
+    .badge-hil {
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--green);
+      border-color: rgba(34, 197, 94, 0.3);
+    }
+    .badge-anfis {
+      background: rgba(249, 115, 22, 0.15);
+      color: var(--primary);
+      border-color: rgba(249, 115, 22, 0.3);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .card-title {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding-bottom: 6px;
+    }
+    .card-value {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .card-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .console-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .console-card h3 {
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+      color: var(--cyan);
+    }
+    .terminal {
+      background: #04070c;
+      border: 1px solid #111b27;
+      border-radius: 6px;
+      padding: 12px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: #38bdf8;
+      height: 110px;
+      overflow-y: auto;
+      line-height: 1.6;
+    }
+    .disclaimer-card {
+      background: #090e17;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .disclaimer-title {
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: #f59e0b;
+      margin-bottom: 8px;
+    }
+    .disclaimer-text {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: #cbd5e1;
+      text-align: justify;
+    }
+    footer {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    footer a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>پنل فرماندهی عملیات تولید انبوه موتورهای اسکرم جت هیدروژنه موشکهای بالستیک:</h1>
-        <span class="badge">HIL SIMULINK CONNECTED</span>
+  <header>
+    <div class="header-content">
+      <div>
+        <h1>پنل فرماندهی عملیات تولید انبوه موتورهای اسکرم جت هیدروژنه موشکهای بالستیک</h1>
+        <div class="subtitle">برگرفته از پرپوزال حسین لعلیان سال ۱۳۹۵</div>
+      </div>
+      <div class="badges">
+        <span class="badge badge-hil">● HIL SIMULINK CONNECTED</span>
+        <span class="badge badge-anfis">ANFIS CONTROL</span>
+        <span class="badge" style="background:rgba(56,189,248,0.15); color:var(--cyan); border-color:rgba(56,189,248,0.3);">FEDERATED SENSORS</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-title">عدد ماخ جریان ورودی اینلت (Inlet Mach)</div>
+      <div class="card-value" id="machVal">Mach 6.8</div>
+      <div class="card-meta">جریان فراصوت پایدار با شوک مایل بازگشتی</div>
     </div>
 
-    <div class="grid-container">
-        <div class="card">
-            <div class="card-title">تله‌متری احتراق فراصوت، دینامیک سیالاتی و رانش (Thrust Telemetry)</div>
-            <div class="metrics-grid">
-                <div class="metric-box">
-                    <span>عدد ماخ جریان ورودی اینلت:</span>
-                    <strong style="color: var(--accent-scram);">Mach 6.8 (پایدار)</strong>
-                </div>
-                <div class="metric-box">
-                    <span>دمای محفظه احتراق اسکرم‌جت:</span>
-                    <strong>۲٬۴۸۰ K (خنک‌کاری بازیابشی)</strong>
-                </div>
-                <div class="metric-box">
-                    <span>فشار تزریق هیدروژن فوق‌سرد:</span>
-                    <strong>۸۵ bar (سوخت LH2)</strong>
-                </div>
-                <div class="metric-box">
-                    <span>راندمان اختلاط سوخت و هوا:</span>
-                    <strong style="color: var(--accent-green);">۹۸٫۴٪ (الگوریتم ANFIS)</strong>
-                </div>
-            </div>
-            <div style="background: #07101c; border: 1px solid var(--border-ui); padding: 10px; border-radius: 6px; margin-top: 10px;">
-                <span style="font-size: 11px; color: var(--text-dim);">نرخ تراست ویژه تولیدی (Specific Impulse - Isp):</span>
-                <div style="font-size: 15px; font-weight: bold; color: var(--accent-flame); margin-top: 4px;">۲٬۳۵۰ ثانیه | پایداری شوک‌های مایل در ورودی هوا</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-title">فرمان‌های تست محفظه احتراق و شبیه‌سازی خط تولید انبوه</div>
-            <button class="btn" onclick="triggerAction('IGNITION')">🔥 تست ترتیبی پاشش چندمرحله‌ای هیدروژن و اشتعال ماوراء صوت</button>
-            <button class="btn" onclick="triggerAction('SHOCK')">⚡ کنترل دینامیک شوک‌های موج ضربه‌ای اینلت (Shock-Wave Isolation)</button>
-            <button class="btn btn-danger" onclick="triggerAction('PURGE')">⚠️ شستشوی اضطراری مسیر خطوط هیدروژن با گاز هلیوم (Purge Sequence)</button>
-            <div class="console" id="logBox" style="margin-top: 10px;">
-                <div>[سیستم] اتصال بی‌درنگ لایه استنتاج به ماژول‌های شبیه‌ساز آیرودینامیک و احتراق برقرار است.</div>
-            </div>
-        </div>
+    <div class="card">
+      <div class="card-title">دمای محفظه احتراق اسکرم‌جت</div>
+      <div class="card-value" id="tempVal">۲٬۴۸۰ K</div>
+      <div class="card-meta">سیستم خنک‌کاری فعال بازیابشی (Regenerative)</div>
     </div>
 
-    <!-- کادر بیانیه حقوقی و فنی سیستم -->
-    <div class="legal-box">
-        <h3>بیانیه حقوقی و فنی سیستم (Demo Verification):</h3>
-        <p>جهت ممانعت از کپی‌برداری غیرمجاز و حفظ حقوق مالکیت فکری، این نسخه ارائه‌شده صرفاً یک دمو با داده‌های نمونه و تقلیل‌یافته (Synthetic/Minimal) می‌باشد. در صورت ثبت سفارش صنعتی، پنل نهایی به‌صورت تکاملی توسعه یافته و از طریق پروتکل‌های سخت‌افزاری صنعتی (HIL) به لبه‌های هوش مصنوعی فدرال پردازشی واقعی (Real-Time Sensors Edge)، داده‌های مدل‌های شبیه‌ساز Simulink متصل می‌گردد تا کمترین ضریب خطا محاسبه نماید.</p>
-        <p>و هر زمان پل واقعی Simulink/HIL و سنسورهای هوش مصنوعی لبه فدرال متصل شوند، سیستم آماده دریافت اطلاعات زنده خواهد بود.</p>
+    <div class="card">
+      <div class="card-title">فشار تزریق هیدروژن فوق‌سرد (LH2)</div>
+      <div class="card-value" id="pressVal">۸۵ bar</div>
+      <div class="card-meta">تزریق سوخت کرایوژنیک چندنقطه‌ای لبه حمله</div>
     </div>
 
-    <div class="footer-card">
-        <p>طراحی و توسعه مهندسی: <strong>حسین لعلیان؛ رتبه ۳۲ کنکور دکتری</strong></p>
-        <p>رایانامه رسمی ارتباطات صنعتی: <code>ai.algorithms.ballistics@gmail.com</code></p>
+    <div class="card">
+      <div class="card-title">راندمان اختلاط سوخت و هوا (Combustion Eff.)</div>
+      <div class="card-value" id="effVal">۹۸.۴ ٪</div>
+      <div class="card-meta">بهینه‌سازی بلادرنگ تطبیقی مدل ANFIS</div>
     </div>
 
-    <script>
-        function triggerAction(type) {
-            const log = document.getElementById('logBox');
-            const time = new Date().toLocaleTimeString('fa-IR');
-            let text = "";
-            if(type === 'IGNITION') text = `[${time}] توالی پاشش میکرواینجکتورهای LH2 فعال شد: زمان اقامت سوخت ۰٫۸ میلی‌ثانیه، شعله ماوراء صوت تثبیت گردید.`;
-            else if(type === 'SHOCK') text = `[${time}] هندسه لبه ورودی تنظیم شد: موقعیت سیستم امواج ضربه‌ای روی گلویی ایزولاتور قفل شد.`;
-            else if(type === 'PURGE') text = `[${time}] پروتکل قطع جریان فعال شد: والوهای برودتی بسته و خطوط با گاز نجیب هلیوم پاکسازی شدند.`;
-            const item = document.createElement('div');
-            item.innerText = text;
-            log.appendChild(item);
-            log.scrollTop = log.scrollHeight;
-        }
-    </script>
+    <div class="card" style="grid-column: 1 / -1;">
+      <div class="card-title">نرخ تراست ویژه تولیدی (Specific Impulse - Isp)</div>
+      <div class="card-value" style="color:var(--primary);" id="ispVal">۲٬۳۵۰ sec</div>
+      <div class="card-meta">ضریب پایداری شوک‌های مایل در ورودی هوا: ۹۹.۲٪ | خط تولید رباتیک و کالیبراسیون صنعتی انبوه</div>
+    </div>
+  </div>
+
+  <div class="console-card">
+    <h3>فرمان‌های تست محفظه احتراق و مانیتورینگ بلادرنگ خط تولید انبوه</h3>
+    <div class="terminal" id="termLogs">
+      <div>[سیستم] اتصال بی‌درنگ لایه استنتاج به ماژول‌های شبیه‌ساز آیرودینامیک و احتراق برقرار است.</div>
+      <div>[شبیه‌ساز] نرخ جریان تزریق هیدروژن مایع با پالس‌های فرکانس بالا تراز گردید.</div>
+      <div>[کنترل] الگوریتم مهار لرزش پدیده‌های گذر صوت پایدار گزارش شد.</div>
+    </div>
+  </div>
+
+  <div class="disclaimer-card">
+    <div class="disclaimer-title">بیانیه حقوقی و فنی سیستم (Demo Verification):</div>
+    <div class="disclaimer-text">
+      جهت ممانعت از کپی‌برداری غیرمجاز و حفظ حقوق مالکیت فکری، این نسخه ارائه‌شده صرفاً یک دمو با داده‌های نمونه و تقلیل‌یافته (Synthetic/Minimal) می‌باشد. در صورت ثبت سفارش صنعتی، پنل نهایی به‌صورت تکاملی توسعه یافته و از طریق پروتکل‌های سخت‌افزاری صنعتی (HIL) به لبه‌های هوش مصنوعی فدرال پردازشی واقعی (Real-Time Sensors Edge)، داده‌های مدل‌های شبیه‌ساز Simulink متصل می‌گردد تا کمترین ضریب خطا محاسبه نماید. و هر زمان پل واقعی Simulink/HIL و سنسورهای هوش مصنوعی لبه فدرال متصل شوند، سیستم آماده دریافت اطلاعات زنده خواهد بود.
+    </div>
+  </div>
+
+  <footer>
+    <div>
+      طراحی و توسعه مهندسی: <strong>حسین لعلیان؛ رتبه ۳۲ کنکور دکتری</strong>
+    </div>
+    <div>
+      رایانامه رسمی ارتباطات صنعتی: <a href="mailto:ai.algorithms.ballistics@gmail.com">ai.algorithms.ballistics@gmail.com</a>
+    </div>
+  </footer>
+
+  <script>
+    // شبیه‌ساز نوسان میکرو در بستر دمو
+    setInterval(() => {
+      const mach = (6.78 + Math.random() * 0.05).toFixed(2);
+      const temp = Math.floor(2475 + Math.random() * 12);
+      const eff = (98.2 + Math.random() * 0.4).toFixed(1);
+      
+      document.getElementById('machVal').innerText = 'Mach ' + mach;
+      document.getElementById('tempVal').innerText = temp.toLocaleString('fa-IR') + ' K';
+      document.getElementById('effVal').innerText = eff + ' ٪';
+    }, 2500);
+  </script>
 </body>
 </html>
